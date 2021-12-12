@@ -19,26 +19,36 @@ defmodule Schema.Validator.Skipping do
 
     ## Examples
 
-    iex> Schema.Validator.Skipping.skip?("", allow_nil: true)
-    false
-    iex> Schema.Validator.Skipping.skip?("", allow_blank: true)
-    true
-    iex> Schema.Validator.Skipping.skip?(nil, allow_nil: true)
-    true
-    iex> Schema.Validator.Skipping.skip?(nil, allow_blank: true)
-    true
-    iex> Schema.Validator.Skipping.skip?(nil, allow_blank: true, allow_nil: true)
-    true
-    iex> Schema.Validator.Skipping.skip?("", allow_blank: true, allow_nil: true)
-    true
-    iex> Schema.Validator.Skipping.skip?(1, allow_nil: true)
-    false
-    iex> Schema.Validator.Skipping.skip?(1, allow_blank: true)
-    false
-    iex> Schema.Validator.Skipping.skip?(1, allow_blank: true, allow_nil: true)
-    false
-    iex> Schema.Validator.Skipping.skip?(1, allow_blank: true, allow_nil: true)
-    false
+        iex> Schema.Validator.Skipping.skip?("", allow_nil: true)
+        false
+
+        iex> Schema.Validator.Skipping.skip?("", allow_blank: true)
+        true
+
+        iex> Schema.Validator.Skipping.skip?(nil, allow_nil: true)
+        true
+
+        iex> Schema.Validator.Skipping.skip?(nil, allow_blank: true)
+        true
+
+        iex> Schema.Validator.Skipping.skip?(nil, allow_blank: true, allow_nil: true)
+        true
+
+        iex> Schema.Validator.Skipping.skip?("", allow_blank: true, allow_nil: true)
+        true
+
+        iex> Schema.Validator.Skipping.skip?(1, allow_nil: true)
+        false
+
+        iex> Schema.Validator.Skipping.skip?(1, allow_blank: true)
+        false
+
+        iex> Schema.Validator.Skipping.skip?(1, allow_blank: true, allow_nil: true)
+        false
+
+        iex> Schema.Validator.Skipping.skip?(1, allow_blank: true, allow_nil: true)
+        false
+
     """
     def skip?(value, options) do
         cond do

@@ -21,14 +21,17 @@ defmodule Schema.Validator.ErrorMessage do
 
     ## Examples
 
-    iex> Schema.Validator.ErrorMessage.message(nil, "default")
-    "default"
-    iex> Schema.Validator.ErrorMessage.message([message: "override"], "default")
-    "override"
-    iex> Schema.Validator.ErrorMessage.message([message: "Context #<%= value %>"], "default", value: 2)
-    "Context #2"
-    iex> Schema.Validator.ErrorMessage.message([message: "Context #<%= value %>", error_renderer: Schema.ErrorRenderers.Parameterized], "default", value: 2)
-    [message: "Context #<%= value %>", context: [value: 2]]
+        iex> Schema.Validator.ErrorMessage.message(nil, "default")
+        "default"
+
+        iex> Schema.Validator.ErrorMessage.message([message: "override"], "default")
+        "override"
+
+        iex> Schema.Validator.ErrorMessage.message([message: "Context #<%= value %>"], "default", value: 2)
+        "Context #2"
+
+        iex> Schema.Validator.ErrorMessage.message([message: "Context #<%= value %>", error_renderer: Schema.ErrorRenderers.Parameterized], "default", value: 2)
+        [message: "Context #<%= value %>", context: [value: 2]]
     """
     def message(options, default, context \\ []) do
         renderer = extract_error_renderer(options)
