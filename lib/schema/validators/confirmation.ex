@@ -15,32 +15,38 @@ defmodule Schema.Validators.Confirmation do
 
     ## Examples
 
-    iex> Schema.Validators.Confirmation.validate(["foo", "bar"], true)
-    {:error, "must match its confirmation"}
-    iex> Schema.Validators.Confirmation.validate(["foo", "foo"], true)
-    :ok
-    iex> Schema.Validators.Confirmation.validate(["foo", "bar"], message: "<%= confirmation %> isn't the same as <%= value %>!")
-    {:error, "bar isn't the same as foo!"}
-    iex> Schema.Validators.Confirmation.validate([nil, "bar"], true)
-    :ok
-    iex> Schema.Validators.Confirmation.validate(["foo", nil], true)
-    {:error, "must match its confirmation"}
-    iex> Schema.Validators.Confirmation.validate(["foo", nil], message: "must match!")
-    {:error, "must match!"}
-    iex> Schema.Validators.Confirmation.validate(["", "unneeded"], [allow_blank: true])
-    :ok
+        iex> Schema.Validators.Confirmation.validate(["foo", "bar"], true)
+        {:error, "must match its confirmation"}
+
+        iex> Schema.Validators.Confirmation.validate(["foo", "foo"], true)
+        :ok
+
+        iex> Schema.Validators.Confirmation.validate(["foo", "bar"], message: "<%= confirmation %> isn't the same as <%= value %>!")
+        {:error, "bar isn't the same as foo!"}
+
+        iex> Schema.Validators.Confirmation.validate([nil, "bar"], true)
+        :ok
+
+        iex> Schema.Validators.Confirmation.validate(["foo", nil], true)
+        {:error, "must match its confirmation"}
+
+        iex> Schema.Validators.Confirmation.validate(["foo", nil], message: "must match!")
+        {:error, "must match!"}
+
+        iex> Schema.Validators.Confirmation.validate(["", "unneeded"], [allow_blank: true])
+        :ok
 
     ## Custom Error Messages
 
     Custom error messages (in EEx format), provided as :message, can use the following values:
 
-    iex> Schema.Validators.Confirmation.__validator__(:message_fields)
-    [value: "The value to confirm", confirmation: "Bad confirmation value"]
+        iex> Schema.Validators.Confirmation.__validator__(:message_fields)
+        [value: "The value to confirm", confirmation: "Bad confirmation value"]
 
     An example:
 
-    iex> Schema.Validators.Confirmation.validate(["foo", nil], message: "<%= inspect confirmation %> doesn't match <%= inspect value %>")
-    {:error, ~S(nil doesn't match "foo")}
+        iex> Schema.Validators.Confirmation.validate(["foo", nil], message: "<%= inspect confirmation %> doesn't match <%= inspect value %>")
+        {:error, ~S(nil doesn't match "foo")}
 
     """
     use Schema.Validator

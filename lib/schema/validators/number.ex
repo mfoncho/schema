@@ -27,106 +27,124 @@ defmodule Schema.Validators.Number do
     
     Examples when using the `:is` option:
 
-    iex> Schema.Validators.Number.validate("not_a_number", is: true)
-    {:error, "must be a number"}
-    iex> Schema.Validators.Number.validate(3.14, is: true)
-    :ok
+        iex> Schema.Validators.Number.validate("not_a_number", is: true)
+        {:error, "must be a number"}
 
-    iex> Schema.Validators.Number.validate("not_a_number", is: false)
-    :ok
-    iex> Schema.Validators.Number.validate(3.14, is: false)
-    {:error, "must not be a number"}
+        iex> Schema.Validators.Number.validate(3.14, is: true)
+        :ok
+
+        iex> Schema.Validators.Number.validate("not_a_number", is: false)
+        :ok
+
+        iex> Schema.Validators.Number.validate(3.14, is: false)
+        {:error, "must not be a number"}
 
     Examples when using the boolean value in options for the `:is` option:
     
-    iex> Schema.Validators.Number.validate("not_a_number", true)
-    {:error, "must be a number"}
-    iex> Schema.Validators.Number.validate(3.14, true)
-    :ok
-    
-    iex> Schema.Validators.Number.validate("not_a_number", false)
-    :ok
-    iex> Schema.Validators.Number.validate(3.14, false)
-    {:error, "must not be a number"}
+        iex> Schema.Validators.Number.validate("not_a_number", true)
+        {:error, "must be a number"}
+
+        iex> Schema.Validators.Number.validate(3.14, true)
+        :ok
+        
+        iex> Schema.Validators.Number.validate("not_a_number", false)
+        :ok
+
+        iex> Schema.Validators.Number.validate(3.14, false)
+        {:error, "must not be a number"}
     
     Examples when using the `:equal_to` option:
     
-    iex> Schema.Validators.Number.validate(3.14, equal_to: 1.41)
-    {:error, "must be a number equal to 1.41"}
-    iex> Schema.Validators.Number.validate(3.14, equal_to: 3.14)
-    :ok
-    iex> Schema.Validators.Number.validate(3.14, equal_to: 6.28)
-    {:error, "must be a number equal to 6.28"}
+        iex> Schema.Validators.Number.validate(3.14, equal_to: 1.41)
+        {:error, "must be a number equal to 1.41"}
+
+        iex> Schema.Validators.Number.validate(3.14, equal_to: 3.14)
+        :ok
+
+        iex> Schema.Validators.Number.validate(3.14, equal_to: 6.28)
+        {:error, "must be a number equal to 6.28"}
     
     Examples when using the `:greater_than` option:
     
-    iex> Schema.Validators.Number.validate(3.14, greater_than: 1.41)
-    :ok
-    iex> Schema.Validators.Number.validate(3.14, greater_than: 3.14)
-    {:error, "must be a number greater than 3.14"}
-    iex> Schema.Validators.Number.validate(3.14, greater_than: 6.28)
-    {:error, "must be a number greater than 6.28"}
+        iex> Schema.Validators.Number.validate(3.14, greater_than: 1.41)
+        :ok
+
+        iex> Schema.Validators.Number.validate(3.14, greater_than: 3.14)
+        {:error, "must be a number greater than 3.14"}
+
+        iex> Schema.Validators.Number.validate(3.14, greater_than: 6.28)
+        {:error, "must be a number greater than 6.28"}
     
     Examples when using the `:greater_than_or_equal_to` option:
     
-    iex> Schema.Validators.Number.validate(3.14, greater_than_or_equal_to: 1.41)
-    :ok
-    iex> Schema.Validators.Number.validate(3.14, greater_than_or_equal_to: 3.14)
-    :ok
-    iex> Schema.Validators.Number.validate(3.14, greater_than_or_equal_to: 6.28)
-    {:error, "must be a number greater than or equal to 6.28"}
+        iex> Schema.Validators.Number.validate(3.14, greater_than_or_equal_to: 1.41)
+        :ok
+
+        iex> Schema.Validators.Number.validate(3.14, greater_than_or_equal_to: 3.14)
+        :ok
+
+        iex> Schema.Validators.Number.validate(3.14, greater_than_or_equal_to: 6.28)
+        {:error, "must be a number greater than or equal to 6.28"}
     
     Examples when using the `:less_than` option:
     
-    iex> Schema.Validators.Number.validate(3.14, less_than: 1.41)
-    {:error, "must be a number less than 1.41"}
-    iex> Schema.Validators.Number.validate(3.14, less_than: 3.14)
-    {:error, "must be a number less than 3.14"}
-    iex> Schema.Validators.Number.validate(3.14, less_than: 6.28)
-    :ok
+        iex> Schema.Validators.Number.validate(3.14, less_than: 1.41)
+        {:error, "must be a number less than 1.41"}
+
+        iex> Schema.Validators.Number.validate(3.14, less_than: 3.14)
+        {:error, "must be a number less than 3.14"}
+
+        iex> Schema.Validators.Number.validate(3.14, less_than: 6.28)
+        :ok
     
     Examples when using the `:less_than_or_equal_to` option:
     
-    iex> Schema.Validators.Number.validate(3.14, less_than_or_equal_to: 1.41)
-    {:error, "must be a number less than or equal to 1.41"}
-    iex> Schema.Validators.Number.validate(3.14, less_than_or_equal_to: 3.14)
-    :ok
-    iex> Schema.Validators.Number.validate(3.14, less_than_or_equal_to: 6.28)
-    :ok
+        iex> Schema.Validators.Number.validate(3.14, less_than_or_equal_to: 1.41)
+        {:error, "must be a number less than or equal to 1.41"}
+
+        iex> Schema.Validators.Number.validate(3.14, less_than_or_equal_to: 3.14)
+        :ok
+
+        iex> Schema.Validators.Number.validate(3.14, less_than_or_equal_to: 6.28)
+        :ok
     
     Examples when using the combinations of the above options:
     
-    iex> Schema.Validators.Number.validate("not_a_number", is: true, greater_than: 0, less_than_or_equal_to: 3.14)
-    {:error, "must be a number"}
-    iex> Schema.Validators.Number.validate(0, is: true, greater_than: 0, less_than_or_equal_to: 3.14)
-    {:error, "must be a number greater than 0"}
-    iex> Schema.Validators.Number.validate(1.41, is: true, greater_than: 0, less_than_or_equal_to: 3.14)
-    :ok
-    iex> Schema.Validators.Number.validate(3.14, is: true, greater_than: 0, less_than_or_equal_to: 3.14)
-    :ok
-    iex> Schema.Validators.Number.validate(6.28, is: true, greater_than: 0, less_than_or_equal_to: 3.14)
-    {:error, "must be a number less than or equal to 3.14"}
+        iex> Schema.Validators.Number.validate("not_a_number", is: true, greater_than: 0, less_than_or_equal_to: 3.14)
+        {:error, "must be a number"}
+
+        iex> Schema.Validators.Number.validate(0, is: true, greater_than: 0, less_than_or_equal_to: 3.14)
+        {:error, "must be a number greater than 0"}
+
+        iex> Schema.Validators.Number.validate(1.41, is: true, greater_than: 0, less_than_or_equal_to: 3.14)
+        :ok
+
+        iex> Schema.Validators.Number.validate(3.14, is: true, greater_than: 0, less_than_or_equal_to: 3.14)
+        :ok
+
+        iex> Schema.Validators.Number.validate(6.28, is: true, greater_than: 0, less_than_or_equal_to: 3.14)
+        {:error, "must be a number less than or equal to 3.14"}
     
     ## Custom Error Messages
     
     Custom error messages (in EEx format), provided as :message, can use the following values:
     
-    iex> Schema.Validators.Number.__validator__(:message_fields)
-    [                             
-        value: "Bad value",         
-        is: "Is number",            
-        equal_to: "Equal to number",             
-        greater_than: "Greater than number",
-        greater_than_or_equal_to: "Greater than or equal to number",
-        less_than: "Less than number",
-        less_than_or_equal_to: "Less than or equal to number"
-    ]
+        iex> Schema.Validators.Number.__validator__(:message_fields)
+        [                             
+            value: "Bad value",         
+            is: "Is number",            
+            equal_to: "Equal to number",             
+            greater_than: "Greater than number",
+            greater_than_or_equal_to: "Greater than or equal to number",
+            less_than: "Less than number",
+            less_than_or_equal_to: "Less than or equal to number"
+        ]
     
     An example:
     
-    iex> Schema.Validators.Number.validate(3.14, less_than: 1.41,
-    ...> message: "<%= inspect value %> should be less than <%= less_than %>")
-    {:error, "3.14 should be less than 1.41"}
+        iex> Schema.Validators.Number.validate(3.14, less_than: 1.41,
+        ...> message: "<%= inspect value %> should be less than <%= less_than %>")
+        {:error, "3.14 should be less than 1.41"}
     """
     
     use Schema.Validator

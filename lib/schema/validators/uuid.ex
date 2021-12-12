@@ -33,61 +33,68 @@ defmodule Schema.Validators.Uuid do
     
     Examples when using the `:any` or `true` options:
     
-    iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :any)
-    :ok
-    iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a30", format: :any)
-    {:error, "must be a valid UUID string"}
-    
-    iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", true)
-    :ok
-    iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a30", true)
-    {:error, "must be a valid UUID string"}
-    
+        iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :any)
+        :ok
+
+        iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a30", format: :any)
+        {:error, "must be a valid UUID string"}
+        
+        iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", true)
+        :ok
+
+        iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a30", true)
+        {:error, "must be a valid UUID string"}
+        
     Examples when using the `:not_any` or `false` options:
-    
-    iex> Schema.Validators.Uuid.validate("not_a_uuid", format: :not_any)
-    :ok
-    iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :not_any)
-    {:error, "must not be a valid UUID string"}
-    
-    iex> Schema.Validators.Uuid.validate("not_a_uuid", false)
-    :ok
-    iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", false)
-    {:error, "must not be a valid UUID string"}
-    
+        
+        iex> Schema.Validators.Uuid.validate("not_a_uuid", format: :not_any)
+        :ok
+
+        iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :not_any)
+        {:error, "must not be a valid UUID string"}
+        
+        iex> Schema.Validators.Uuid.validate("not_a_uuid", false)
+        :ok
+
+        iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", false)
+        {:error, "must not be a valid UUID string"}
+        
     Examples when using the `:default` option:
-    
-    iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :default)
-    :ok
-    iex> Schema.Validators.Uuid.validate("02aa7f483ccd11e4b63e14109ff1a304", format: :default)
-    {:error, "must be a valid UUID string in default format"}
+        
+        iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :default)
+        :ok
+        
+        iex> Schema.Validators.Uuid.validate("02aa7f483ccd11e4b63e14109ff1a304", format: :default)
+        {:error, "must be a valid UUID string in default format"}
     
     Examples when using the `:hex` option:
     
-    iex> Schema.Validators.Uuid.validate("02aa7f483ccd11e4b63e14109ff1a304", format: :hex)
-    :ok
-    iex> Schema.Validators.Uuid.validate("urn:uuid:02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :hex)
-    {:error, "must be a valid UUID string in hex format"}
-    
+        iex> Schema.Validators.Uuid.validate("02aa7f483ccd11e4b63e14109ff1a304", format: :hex)
+        :ok
+
+        iex> Schema.Validators.Uuid.validate("urn:uuid:02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :hex)
+        {:error, "must be a valid UUID string in hex format"}
+        
     Examples when using the `:urn` option:
-    
-    iex> Schema.Validators.Uuid.validate("urn:uuid:02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :urn)
-    :ok
-    iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :urn)
-    {:error, "must be a valid UUID string in urn format"}
+        
+        iex> Schema.Validators.Uuid.validate("urn:uuid:02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :urn)
+        :ok
+
+        iex> Schema.Validators.Uuid.validate("02aa7f48-3ccd-11e4-b63e-14109ff1a304", format: :urn)
+        {:error, "must be a valid UUID string in urn format"}
     
     ## Custom Error Messages
     
     Custom error messages (in EEx format), provided as `:message`, can use the following values:
     
-    iex> Schema.Validators.Uuid.__validator__(:message_fields)
-    [value: "Bad value", format: "The UUID format"]
+        iex> Schema.Validators.Uuid.__validator__(:message_fields)
+        [value: "Bad value", format: "The UUID format"]
     
     An example:
     
-    iex> Schema.Validators.Uuid.validate("not_a_uuid", format: :any,
-    ...> message: "<%= value %> should be <%= format %> UUID")
-    {:error, "not_a_uuid should be any UUID"}
+        iex> Schema.Validators.Uuid.validate("not_a_uuid", format: :any,
+        ...> message: "<%= value %> should be <%= format %> UUID")
+        {:error, "not_a_uuid should be any UUID"}
     """
     
     use Schema.Validator

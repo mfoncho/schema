@@ -25,45 +25,57 @@ defmodule Schema.Validators.Length do
 
     ## Examples
 
-    iex> Schema.Validators.Length.validate("foo", 3)
-    :ok
-    iex> Schema.Validators.Length.validate("foo", 2)
-    {:error, "must have a length of 2"}
-    iex> Schema.Validators.Length.validate(nil, [is: 2, allow_nil: true])
-    :ok
-    iex> Schema.Validators.Length.validate("", [is: 2, allow_blank: true])
-    :ok
-    iex> Schema.Validators.Length.validate("foo", min: 2, max: 8)
-    :ok
-    iex> Schema.Validators.Length.validate("foo", min: 4)
-    {:error, "must have a length of at least 4"}
-    iex> Schema.Validators.Length.validate("foo", max: 2)
-    {:error, "must have a length of no more than 2"}
-    iex> Schema.Validators.Length.validate("foo", max: 2, message: "must be the right length")
-    {:error, "must be the right length"}
-    iex> Schema.Validators.Length.validate("foo", is: 3)
-    :ok
-    iex> Schema.Validators.Length.validate("foo", is: 2)
-    {:error, "must have a length of 2"}
-    iex> Schema.Validators.Length.validate("foo", in: 1..6)
-    :ok
-    iex> Schema.Validators.Length.validate("foo", in: 8..10)
-    {:error, "must have a length between 8 and 10"}
-    iex> Schema.Validators.Length.validate("four words are here", max: 4, tokenizer: &String.split/1)
-    :ok
+        iex> Schema.Validators.Length.validate("foo", 3)
+        :ok
+
+        iex> Schema.Validators.Length.validate("foo", 2)
+        {:error, "must have a length of 2"}
+
+        iex> Schema.Validators.Length.validate(nil, [is: 2, allow_nil: true])
+        :ok
+
+        iex> Schema.Validators.Length.validate("", [is: 2, allow_blank: true])
+        :ok
+
+        iex> Schema.Validators.Length.validate("foo", min: 2, max: 8)
+        :ok
+
+        iex> Schema.Validators.Length.validate("foo", min: 4)
+        {:error, "must have a length of at least 4"}
+
+        iex> Schema.Validators.Length.validate("foo", max: 2)
+        {:error, "must have a length of no more than 2"}
+
+        iex> Schema.Validators.Length.validate("foo", max: 2, message: "must be the right length")
+        {:error, "must be the right length"}
+
+        iex> Schema.Validators.Length.validate("foo", is: 3)
+        :ok
+
+        iex> Schema.Validators.Length.validate("foo", is: 2)
+        {:error, "must have a length of 2"}
+
+        iex> Schema.Validators.Length.validate("foo", in: 1..6)
+        :ok
+
+        iex> Schema.Validators.Length.validate("foo", in: 8..10)
+        {:error, "must have a length between 8 and 10"}
+
+        iex> Schema.Validators.Length.validate("four words are here", max: 4, tokenizer: &String.split/1)
+        :ok
 
     ## Custom Error Messages
 
     Custom error messages (in EEx format), provided as :message, can use the following values:
 
-    iex> Schema.Validators.Length.__validator__(:message_fields)
-    [value: "Bad value", tokens: "Tokens from value", size: "Number of tokens", min: "Minimum acceptable value", max: "Maximum acceptable value"]
+        iex> Schema.Validators.Length.__validator__(:message_fields)
+        [value: "Bad value", tokens: "Tokens from value", size: "Number of tokens", min: "Minimum acceptable value", max: "Maximum acceptable value"]
     
     An example:
     
-    iex> Schema.Validators.Length.validate("hello my darling", min: 4, tokenizer: &String.split/1,
-    ...> message: "<%= length tokens %> words isn't enough")
-    {:error, "3 words isn't enough"}
+        iex> Schema.Validators.Length.validate("hello my darling", min: 4, tokenizer: &String.split/1,
+        ...> message: "<%= length tokens %> words isn't enough")
+        {:error, "3 words isn't enough"}
 
     """
     use Schema.Validator

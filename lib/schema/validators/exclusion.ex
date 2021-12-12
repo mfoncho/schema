@@ -12,30 +12,35 @@ defmodule Schema.Validators.Exclusion do
     
     ## Examples
     
-    iex> Schema.Validators.Exclusion.validate(1, [1, 2, 3])
-    {:error, "must not be one of [1, 2, 3]"}
-    iex> Schema.Validators.Exclusion.validate(1, [in: [1, 2, 3]])
-    {:error, "must not be one of [1, 2, 3]"}
-    iex> Schema.Validators.Exclusion.validate(1, [in: [1, 2, 3], message: "<%= value %> shouldn't be in <%= inspect list %>"])
-    {:error, "1 shouldn't be in [1, 2, 3]"}
-    iex> Schema.Validators.Exclusion.validate(4, [1, 2, 3])
-    :ok
-    iex> Schema.Validators.Exclusion.validate("a", ~w(a b c))
-    {:error, ~S(must not be one of ["a", "b", "c"])}
-    iex> Schema.Validators.Exclusion.validate("a", in: ~w(a b c), message: "must not be abc, talkin' 'bout 123")
-    {:error, "must not be abc, talkin' 'bout 123"}
+        iex> Schema.Validators.Exclusion.validate(1, [1, 2, 3])
+        {:error, "must not be one of [1, 2, 3]"}
+
+        iex> Schema.Validators.Exclusion.validate(1, [in: [1, 2, 3]])
+        {:error, "must not be one of [1, 2, 3]"}
+
+        iex> Schema.Validators.Exclusion.validate(1, [in: [1, 2, 3], message: "<%= value %> shouldn't be in <%= inspect list %>"])
+        {:error, "1 shouldn't be in [1, 2, 3]"}
+
+        iex> Schema.Validators.Exclusion.validate(4, [1, 2, 3])
+        :ok
+
+        iex> Schema.Validators.Exclusion.validate("a", ~w(a b c))
+        {:error, ~S(must not be one of ["a", "b", "c"])}
+
+        iex> Schema.Validators.Exclusion.validate("a", in: ~w(a b c), message: "must not be abc, talkin' 'bout 123")
+        {:error, "must not be abc, talkin' 'bout 123"}
 
     ## Custom Error Messages
 
     Custom error messages (in EEx format), provided as :message, can use the following values:
     
-    iex> Schema.Validators.Exclusion.__validator__(:message_fields)
-    [value: "The bad value", list: "List"]
+        iex> Schema.Validators.Exclusion.__validator__(:message_fields)
+        [value: "The bad value", list: "List"]
 
     An example:
 
-    iex> Schema.Validators.Exclusion.validate("a", in: ~w(a b c), message: "<%= inspect value %> is a disallowed value")
-    {:error, ~S("a" is a disallowed value)}
+        iex> Schema.Validators.Exclusion.validate("a", in: ~w(a b c), message: "<%= inspect value %> is a disallowed value")
+        {:error, ~S("a" is a disallowed value)}
     """
     use Schema.Validator
 

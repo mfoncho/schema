@@ -12,32 +12,38 @@ defmodule Schema.Validators.Inclusion do
 
     ## Examples
 
-    iex> Schema.Validators.Inclusion.validate(1, [1, 2, 3])
-    :ok
-    iex> Schema.Validators.Inclusion.validate(1, [in: [1, 2, 3]])
-    :ok
-    iex> Schema.Validators.Inclusion.validate(4, [1, 2, 3])
-    {:error, "must be one of [1, 2, 3]"}
-    iex> Schema.Validators.Inclusion.validate("a", ~w(a b c))
-    :ok
-    iex> Schema.Validators.Inclusion.validate(nil, ~w(a b c))
-    {:error, ~S(must be one of ["a", "b", "c"])}
-    iex> Schema.Validators.Inclusion.validate(nil, [in: ~w(a b c), allow_nil: true])
-    :ok
-    iex> Schema.Validators.Inclusion.validate("", [in: ~w(a b c), allow_blank: true])
-    :ok
+        iex> Schema.Validators.Inclusion.validate(1, [1, 2, 3])
+        :ok
+
+        iex> Schema.Validators.Inclusion.validate(1, [in: [1, 2, 3]])
+        :ok
+
+        iex> Schema.Validators.Inclusion.validate(4, [1, 2, 3])
+        {:error, "must be one of [1, 2, 3]"}
+
+        iex> Schema.Validators.Inclusion.validate("a", ~w(a b c))
+        :ok
+
+        iex> Schema.Validators.Inclusion.validate(nil, ~w(a b c))
+        {:error, ~S(must be one of ["a", "b", "c"])}
+
+        iex> Schema.Validators.Inclusion.validate(nil, [in: ~w(a b c), allow_nil: true])
+        :ok
+
+        iex> Schema.Validators.Inclusion.validate("", [in: ~w(a b c), allow_blank: true])
+        :ok
 
     ## Custom Error Messages
 
     Custom error messages (in EEx format), provided as :message, can use the following values:
 
-    iex> Schema.Validators.Inclusion.__validator__(:message_fields)
-    [value: "The bad value", list: "List"]
+        iex> Schema.Validators.Inclusion.__validator__(:message_fields)
+        [value: "The bad value", list: "List"]
 
     An example:
 
-    iex> Schema.Validators.Inclusion.validate("a", in: [1, 2, 3], message: "<%= inspect value %> is not an allowed value")
-    {:error, ~S("a" is not an allowed value)}
+        iex> Schema.Validators.Inclusion.validate("a", in: [1, 2, 3], message: "<%= inspect value %> is not an allowed value")
+        {:error, ~S("a" is not an allowed value)}
 
     """
     use Schema.Validator

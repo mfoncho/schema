@@ -12,34 +12,41 @@ defmodule Schema.Validators.Absence do
 
     ## Examples
 
-    iex> Schema.Validators.Absence.validate(1, true)
-    {:error, "must be absent"}
-    iex> Schema.Validators.Absence.validate(nil, true)
-    :ok
-    iex> Schema.Validators.Absence.validate(false, true)
-    :ok
-    iex> Schema.Validators.Absence.validate("", true)
-    :ok
-    iex> Schema.Validators.Absence.validate([], true)
-    :ok
-    iex> Schema.Validators.Absence.validate([], true)
-    :ok
-    iex> Schema.Validators.Absence.validate([1], true)
-    {:error, "must be absent"}
-    iex> Schema.Validators.Absence.validate({1}, true)
-    {:error, "must be absent"}
+        iex> Schema.Validators.Absence.validate(1, true)
+        {:error, "must be absent"}
+
+        iex> Schema.Validators.Absence.validate(nil, true)
+        :ok
+
+        iex> Schema.Validators.Absence.validate(false, true)
+        :ok
+
+        iex> Schema.Validators.Absence.validate("", true)
+        :ok
+
+        iex> Schema.Validators.Absence.validate([], true)
+        :ok
+
+        iex> Schema.Validators.Absence.validate([], true)
+        :ok
+
+        iex> Schema.Validators.Absence.validate([1], true)
+        {:error, "must be absent"}
+
+        iex> Schema.Validators.Absence.validate({1}, true)
+        {:error, "must be absent"}
 
     ## Custom Error Messages
 
     Custom error messages (in EEx format), provided as :message, can use the following values:
 
-    iex> Schema.Validators.Absence.__validator__(:message_fields)
-    [value: "The bad value"]
+        iex> Schema.Validators.Absence.__validator__(:message_fields)
+        [value: "The bad value"]
 
     An example:
 
-    iex> Schema.Validators.Absence.validate([1], message: "can't be <%= inspect value %>")
-    {:error, "can't be [1]"}
+        iex> Schema.Validators.Absence.validate([1], message: "can't be <%= inspect value %>")
+        {:error, "can't be [1]"}
     """
     use Schema.Validator
 

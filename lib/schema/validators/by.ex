@@ -16,43 +16,51 @@ defmodule Schema.Validators.By do
 
     ## Examples
 
-    iex> Schema.Validators.By.validate(2, &(&1 == 2))
-    :ok
-    iex> Schema.Validators.By.validate(3, &(&1 == 2))
-    {:error, "must be valid"}
-    iex> Schema.Validators.By.validate(["foo", "foo"], &is_list/1)
-    :ok
-    iex> Schema.Validators.By.validate("sgge", fn (word) -> word |> String.reverse == "eggs" end)
-    :ok
-    iex> Schema.Validators.By.validate(nil, [function: &is_list/1, allow_nil: true])
-    :ok
-    iex> Schema.Validators.By.validate({}, [function: &is_list/1, allow_blank: true])
-    :ok
-    iex> Schema.Validators.By.validate([1], [function: &is_list/1, message: "must be a list"])
-    :ok
-    iex> Schema.Validators.By.validate("a", [function: &is_list/1, message: "must be a list"])
-    {:error, "must be a list"}
+        iex> Schema.Validators.By.validate(2, &(&1 == 2))
+        :ok
 
-    iex> Schema.Validators.By.validate(
-    ...>   "a", [function: fn (v) when is_list(v) -> :ok
-    ...>                      (v) -> {:error, {:not_list, v}} end])
-    {:error, {:not_list, "a"}}
-    iex> Schema.Validators.By.validate(
-    ...>   [], [function: fn (v) when is_list(v) -> :ok
-    ...>                     (v) -> {:error, {:not_list, v}} end])
-    :ok
+        iex> Schema.Validators.By.validate(3, &(&1 == 2))
+        {:error, "must be valid"}
+
+        iex> Schema.Validators.By.validate(["foo", "foo"], &is_list/1)
+        :ok
+
+        iex> Schema.Validators.By.validate("sgge", fn (word) -> word |> String.reverse == "eggs" end)
+        :ok
+
+        iex> Schema.Validators.By.validate(nil, [function: &is_list/1, allow_nil: true])
+        :ok
+
+        iex> Schema.Validators.By.validate({}, [function: &is_list/1, allow_blank: true])
+        :ok
+
+        iex> Schema.Validators.By.validate([1], [function: &is_list/1, message: "must be a list"])
+        :ok
+
+        iex> Schema.Validators.By.validate("a", [function: &is_list/1, message: "must be a list"])
+        {:error, "must be a list"}
+
+        iex> Schema.Validators.By.validate(
+        ...>   "a", [function: fn (v) when is_list(v) -> :ok
+        ...>                      (v) -> {:error, {:not_list, v}} end])
+        {:error, {:not_list, "a"}}
+
+        iex> Schema.Validators.By.validate(
+        ...>   [], [function: fn (v) when is_list(v) -> :ok
+        ...>                     (v) -> {:error, {:not_list, v}} end])
+        :ok
 
     ## Custom Error Messages
 
     Custom error messages (in EEx format), provided as :message, can use the following values:
 
-    iex> Schema.Validators.By.__validator__(:message_fields)
-    [value: "The bad value"]
+        iex> Schema.Validators.By.__validator__(:message_fields)
+        [value: "The bad value"]
 
     An example:
 
-    iex> Schema.Validators.By.validate("blah", [function: &is_list/1, message: "<%= inspect value %> isn't a list"])
-    {:error, ~S("blah" isn't a list)}
+        iex> Schema.Validators.By.validate("blah", [function: &is_list/1, message: "<%= inspect value %> isn't a list"])
+        {:error, ~S("blah" isn't a list)}
     """
     use Schema.Validator
 
